@@ -1,0 +1,33 @@
+name: HarmonyChat
+version: ${project.version}
+main: me.lumenowaty.harmonychat.HarmonyChat
+api-version: 1.16
+authors: [ LumenowatyDev ]
+description: This plugin allow you to moderate chat.
+website: www.minestory.pl
+softdepend: [LuckPerms, ActionBarAPI]
+depend: [Vault]
+
+commands:
+  privateMessage:
+    aliases: [pm, msg, message, pw, wiadomosc]
+  ignore:
+  reply:
+    aliases: [odpisz, r]
+  chat:
+  broadcast:
+    aliases: [ogloszenie, bc]
+
+permissions:
+  harmony:
+    chat:
+      bypass:
+        default: op
+      ignore:
+        default: op
+      reply:
+        default: op
+      antiignore:
+        default: op
+      reload:
+        default: op

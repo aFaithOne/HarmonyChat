@@ -1,0 +1,58 @@
+global:
+  inGameCommand: '&cKomenda dostępna tylko dla graczy.'
+  noPermission: '&cBrak uprawnień do użycia tej komendy.'
+  offlinePlayer: '&cPodany gracz jest offline.'
+
+privateMessage:
+  usage: '&fPoprawne użycie komendy: &b/pm <gracz> <wiadomość>'
+  receive: '&3[&b%actor% &f-> &bJa&3] &7%message%'
+  send: '&3[&bJa &f-> &b%target%&3] &7%message%'
+  ignored: '&cNie możesz wysłać wiadomości do &7%target%&c.'
+
+ignore:
+  usage: '&fPoprawne użycie komendy: &b/ignore <gracz>'
+  added: '&aDodano &7%target% &fdo ignorowanych.'
+  removed: '&cUsunięto &7%target% &fz &fignorowanych&f.'
+  list: '&6Lista osób ignorowanych: &7'
+  notAllowed: '&cNie możesz zablokować tego gracza.'
+
+messagesAntiSpam:
+  cooldown: '&cAby wysłać ponownie wiadomość, musisz odczekać &6%time% &csekund.'
+
+reply:
+  usage: '&fPoprawne użycie komendy: &b/reply <wiadomość>'
+  offlinePlayer: '&fGracz, któremu próbujesz odpisać, jest poza serwerem.'
+  noPlayerToReply: '&cNie masz komu odpisać.'
+
+chat:
+  usage: '&fPoprawne użycie komendy: &b/chat <clear/off/on>'
+  cleared:
+    - ' '
+    - '&c&l> &a&lMineStory.pl &f&l- Kwadratowa Przygoda!'
+    - '&c&l> &6&lCzat został wyczyszczony przez Administrację.'
+    - ' '
+  offUsage: '&fPoprawne użycie komendy: &b/chat off <powód>'
+  disabled:
+    - ' '
+    - '&c&l> &a&lMineStory.pl &f&l- Kwadratowa Przygoda!'
+    - '&c&l> &6&lCzat został wyłączony. Powód wyłączenia: &7&l%description%'
+    - ' '
+  disable: '&cCzat jest obecnie wyłączony, z powodu: &7%description%'
+  enabled:
+    - ' '
+    - '&c&l> &a&lMineStory.pl &f&l- Kwadratowa Przygoda!'
+    - '&c&l> &6&lCzat został włączony.'
+    - ' '
+  broadcast:
+    - ' '
+    - '&c&l> &a&lMineStory.pl &f&l- Kwadratowa Przygoda!'
+    - '&c&l> &3&l%message%'
+    - ' '
+  broadcastUsage: '&fPoprawne użycie komendy: &b/broadcast <wiadomość>'
+  reloaded: '&a&lHarmonyChat &6- Plugin został przeładowany.'
+
+antiSpam:
+  timeout: '&cNastępną wiadomość możesz wysłać za &6%time% &csekund.'
+
+privateGroup:
+  usage: '&fPoprawne użycie komendy: &b/group <create/delete/join/leave/invite>'

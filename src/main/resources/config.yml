@@ -1,0 +1,22 @@
+globalChatFormat:
+  groups:
+    default: '&8%NAME% &8» &7%MESSAGE%'
+    Gracz: '&8%NAME% &8» &7%MESSAGE%'
+    Administrator: '&c&lAdministrator &8%NAME% &f» &c%MESSAGE%'
+    SuperModerator: '&5&lSuperMod &8%NAME% &f» &e%MESSAGE%'
+    Moderator: '&2&lModerator &8%NAME% &f» &e%MESSAGE%'
+    Pomocnik: '&3&lPomocnik &8%NAME% &f» &e%MESSAGE%'
+    HeadAdmin: '&4&lHeadAdmin &8%NAME% &f» &c%MESSAGE%'
+    GlobalAdmin: '&c&lGlobalAdmin &8%NAME% &e» &c%MESSAGE%'
+    GlobalMod: '&5&lGlobalMod &8%NAME% &e» &c%MESSAGE%'
+    Deweloper: '&6&lProgramista &8%NAME% &e» &c%MESSAGE%'
+
+antiSpam:
+  cooldown: 5
+
+autoMessages:
+  interval: 60
+  displayTime: 10
+
+
+
