@@ -6,9 +6,9 @@ import me.lumenowaty.harmonychat.systems.privategroupssystem.GroupMessageCommand
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-public class GroupInviteSubCommand extends HSubCommand<GroupMessageCommand> {
+public class GroupCreateSubCommand extends HSubCommand<GroupMessageCommand> {
 
-    public GroupInviteSubCommand(GroupMessageCommand commandExecutor) {
+    public GroupCreateSubCommand(GroupMessageCommand commandExecutor) {
         super(commandExecutor);
     }
 

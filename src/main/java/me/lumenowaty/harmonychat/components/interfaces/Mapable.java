@@ -9,6 +9,8 @@ public interface Mapable<T, K> {
 
     void remove(T t);
 
+    void put(T t, K k);
+
     void setMap(Map<T, K> map);
 
     boolean containsKey(T t);

@@ -5,7 +5,7 @@ globalChatFormat:
     Administrator: '&c&lAdministrator &8%NAME% &f» &c%MESSAGE%'
     SuperModerator: '&5&lSuperMod &8%NAME% &f» &e%MESSAGE%'
     Moderator: '&2&lModerator &8%NAME% &f» &e%MESSAGE%'
-    Pomocnik: '&3&lPomocnik &8%NAME% &f» &e%MESSAGE%'
+    Pomocnik: '&3&lJuniorMod &8%NAME% &f» &e%MESSAGE%'
     HeadAdmin: '&4&lHeadAdmin &8%NAME% &f» &c%MESSAGE%'
     GlobalAdmin: '&c&lGlobalAdmin &8%NAME% &e» &c%MESSAGE%'
     GlobalMod: '&5&lGlobalMod &8%NAME% &e» &c%MESSAGE%'

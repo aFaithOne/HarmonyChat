@@ -25,7 +25,7 @@ reply:
   noPlayerToReply: '&cNie masz komu odpisać.'
 
 chat:
-  usage: '&fPoprawne użycie komendy: &b/chat <clear/off/on>'
+  usage: '&fPoprawne użycie komendy: &b/chat <clear/off/on/reload>'
   cleared:
     - ' '
     - '&c&l> &a&lMineStory.pl &f&l- Kwadratowa Przygoda!'
@@ -55,4 +55,4 @@ antiSpam:
   timeout: '&cNastępną wiadomość możesz wysłać za &6%time% &csekund.'
 
 privateGroup:
-  usage: '&fPoprawne użycie komendy: &b/group <create/delete/join/leave/invite>'
+  usage: '&fPoprawne użycie komendy: &b/group <create/delete/join/leave/invite/remove>'

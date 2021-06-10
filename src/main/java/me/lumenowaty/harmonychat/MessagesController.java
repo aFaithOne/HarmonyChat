@@ -104,8 +104,6 @@ public class MessagesController {
                 .replaceAll("%message%", message);
     }
 
-  //  public String privateMessageIgnored();
-
     /**
      Messages from IgnoreMessageCommand
      */
@@ -199,5 +197,14 @@ public class MessagesController {
         return formatMessage("antiSpam.timeout")
                 .replaceAll("%time%", time);
     }
+
+    /**
+     Messages from PrivateGroups
+     */
+
+    public String privateGroupUsage() {
+        return formatMessage("privateGroup.usage");
+    }
+
 }
 

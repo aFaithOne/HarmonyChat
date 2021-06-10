@@ -3,24 +3,17 @@ package me.lumenowaty.harmonychat.systems.globalchatsystem;
 import me.lumenowaty.harmonychat.MessagesController;
 import me.lumenowaty.harmonychat.PluginController;
 import me.lumenowaty.harmonychat.components.HListener;
-import me.lumenowaty.harmonychat.components.HMap;
-import me.lumenowaty.harmonychat.systems.antispamsystem.AntiSpamHolder;
-import me.lumenowaty.harmonychat.systems.antispamsystem.AntiSpamManager;
+import me.lumenowaty.harmonychat.systems.antispamsystem.AntiSpamChecker;
 import me.lumenowaty.harmonychat.utils.ChatUtils;
 import me.lumenowaty.harmonychat.utils.HarmonyUtils;
-import me.lumenowaty.harmonychat.utils.TimeUtils;
-import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Sound;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.server.BroadcastMessageEvent;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ChatListener extends HListener {
@@ -32,21 +25,15 @@ public class ChatListener extends HListener {
     @EventHandler
     public void onPlayerMessage(AsyncPlayerChatEvent event) {
         MessagesController messages = this.controller.getMessagesController();
-        ChatManager chatManager = this.controller.getChatManager();
 
-        Player player = event.getPlayer();
+        Player actor = event.getPlayer();
 
-        if (! this.canSendMessage(player, chatManager)) {
-
-            event.setCancelled(true);
-            player.sendMessage(messages
-                    .chatOffDisable(chatManager.getChatStatus().getDescription()));
-        }
-        this.antiSpamCheck(player, event, messages);
+        this.canSendMessage(actor, event, messages);
+        this.checkForSpam(actor, event, messages);
 
         String message = event.getMessage();
 
-        event.setFormat(this.getFormat(player, message));
+        this.setFormat(actor.getPlayer(), message, event);
         this.pokeMessage(message);
     }
 
@@ -55,9 +42,12 @@ public class ChatListener extends HListener {
         event.setMessage(ChatUtils.formatText(event.getMessage()));
     }
 
-    private boolean canSendMessage(Player player, ChatManager chatManager) {
-        if (chatManager.getChatStatus().getStatus()) return true;
-        return (player.hasPermission("harmony.chat.bypass"));
+    private void canSendMessage(Player actor, AsyncPlayerChatEvent event, MessagesController messages) {
+        ChatManager chatManager = this.controller.getChatManager();
+        if (chatManager.getChatStatus().getStatus()) return;
+
+        event.setCancelled(true);
+        actor.sendMessage(messages.chatOffDisable(chatManager.getChatStatus().getDescription()));
     }
 
     private void pokeMessage(String message) {
@@ -80,42 +70,24 @@ public class ChatListener extends HListener {
         }
     }
 
-    private void antiSpamCheck(Player target, AsyncPlayerChatEvent event, MessagesController messages) {
+    private void checkForSpam(Player target,AsyncPlayerChatEvent event, MessagesController messages) {
         if (target.hasPermission("harmony.chat.bypass")) return;
 
-        AntiSpamManager antiSpamManager = controller.getAntiSpamManager();
-        AntiSpamHolder holder = antiSpamManager.getAntiSpamHolder();
-        HMap<UUID, LocalDateTime> timeIntervalMessageMap = holder.getTimeIntervalMessageMap();
-        UUID targetUUID = target.getUniqueId();
-        LocalDateTime now = LocalDateTime.now();
-        Optional<LocalDateTime> byKey = timeIntervalMessageMap.getByKey(targetUUID);
+        AntiSpamChecker checker = new AntiSpamChecker(target, event.getMessage());
 
-        int timeout = antiSpamManager.getMessageTimeout();
-
-        if (! byKey.isPresent()) {
-            timeIntervalMessageMap.add(targetUUID, now.plusSeconds(timeout));
-            return;
-        }
-
-        LocalDateTime localDateTime = byKey.get();
-
-        if (now.isBefore(localDateTime)) {
-            target.sendMessage(messages.antiSpamCoolDown(
-                    String.valueOf(TimeUtils.getSecondsDifference(localDateTime, now)+1)));
+        if (checker.isMessageSpam()) {
+            target.sendMessage(messages.antiSpamCoolDown(checker.getTimeRemainingMessage()));
             event.setCancelled(true);
-
-            return;
         }
-
-        timeIntervalMessageMap.add(targetUUID, now.plusSeconds(timeout));
     }
 
-    private String getFormat(Player player, String message) {
+    private void setFormat(Player player, String message, AsyncPlayerChatEvent event) {
         FormattedGroupFactory factory = new FormattedGroupFactory(player);
 
         factory.prepareFormat();
         String format = factory.getFormat();
+        String s = ChatUtils.formatText(format.replaceAll("%MESSAGE%", message));
 
-        return ChatUtils.formatText(format.replaceAll("%MESSAGE%", message));
+        event.setFormat(s);
     }
 }
