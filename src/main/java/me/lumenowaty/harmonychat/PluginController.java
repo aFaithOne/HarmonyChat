@@ -24,7 +24,7 @@ public class PluginController {
     private final YamlConfig mainConfig;
     private final YamlConfig messagesConfig;
 
-    private MessagesController messagesController;
+    final private MessagesController messagesController;
     private AutoMessageManager autoMessagesManager;
     private PrivateMessageManager privateMessageManager;
     private ChatManager chatManager;
@@ -47,11 +47,11 @@ public class PluginController {
     }
 
     private void loadMessagesConfig() {
-        this.messagesConfig.createConfig();;
+        this.messagesConfig.createConfig();
         this.messagesConfig.reload();
     }
 
-    public void loadCommands() {
+    private void loadCommands() {
         this.main.getCommand("privateMessage").setExecutor(new PrivateMessageCommand(this));
         this.main.getCommand("ignore").setExecutor(new IgnorePlayerCommand(this));
         this.main.getCommand("reply").setExecutor(new ReplyMessageCommand(this));
@@ -60,16 +60,16 @@ public class PluginController {
         this.main.getCommand("group").setExecutor(new GroupCommand(this));
     }
 
-    public void loadTabCompleters() {
+    private void loadTabCompleters() {
         this.main.getCommand("chat").setTabCompleter(new ChatCommand(this));
     }
 
-    public void loadEvents() {
+    private void loadEvents() {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new ChatListener(this), this.main);
     }
 
-    public void loadComponents() {
+    private void loadComponents() {
         this.autoMessagesManager = new AutoMessageManager(this);
 
         this.privateMessageManager = new PrivateMessageManager(this);
@@ -96,11 +96,20 @@ public class PluginController {
         this.runComponents();
     }
 
-    public void saveComponents() {
-        this.privateMessageManager.saveComponents();
+    public void runPlugin() {
+        this.loadComponents();
+        this.runComponents();
+        this.loadCommands();
+        this.loadTabCompleters();
+        this.loadEvents();
     }
 
-    public void runComponents() {
+    public void saveComponents() {
+        this.privateMessageManager.saveComponents();
+        this.socialGroupManager.saveComponents();
+    }
+
+    private void runComponents() {
         this.autoMessagesManager.getAutoMessageTask().run();
         this.privateMessageManager.loadComponents();
         this.chatManager.loadComponents();
@@ -110,8 +119,7 @@ public class PluginController {
 
     public void stopComponents() {
         this.autoMessagesManager.getAutoMessageTask().stop();
-        this.privateMessageManager.saveComponents();
-        this.socialGroupManager.saveComponents();
+        this.autoMessagesManager.getAutoMessageTask().clear();
     }
 
     public YamlConfig getMainConfig() {

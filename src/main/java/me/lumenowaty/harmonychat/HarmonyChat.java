@@ -12,16 +12,13 @@ public final class HarmonyChat extends JavaPlugin {
         harmonyChat = this;
 
         controller = new PluginController(harmonyChat);
-        controller.loadComponents();
-        controller.runComponents();
-        controller.loadCommands();
-        controller.loadTabCompleters();
-        controller.loadEvents();
+        controller.runPlugin();
     }
 
     @Override
     public void onDisable() {
         controller.saveComponents();
+        controller.stopComponents();
     }
 
     public static HarmonyChat getInstance() {

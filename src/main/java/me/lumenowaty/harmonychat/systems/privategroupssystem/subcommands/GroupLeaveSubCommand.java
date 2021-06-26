@@ -25,8 +25,8 @@ public class GroupLeaveSubCommand extends HSubCommand<GroupCommand> {
         SocialGroupManager socialGroupManager = HarmonyChat.getController().getSocialGroupManager();
         UUID actorId = actor.getUniqueId();
 
-        if (! socialGroupManager.isPlayerOwnerOfGroup(actor)) {
-            actor.sendMessage(messages.privateGroupsOwnerCommand());
+        if (socialGroupManager.isPlayerOwnerOfGroup(actor)) {
+            actor.sendMessage(messages.privateGroupsNotForOwner());
             return false;
         }
 
@@ -35,10 +35,10 @@ public class GroupLeaveSubCommand extends HSubCommand<GroupCommand> {
         if (! containingActorGroup.isPresent()) {
             actor.sendMessage(messages.privateGroupsNoGroup());
             return false;
-        } else {
-            actor.sendMessage(messages.privateGroupsLeft());
-            containingActorGroup.get().removeMember(actorId);
-            return true;
         }
+
+        actor.sendMessage(messages.privateGroupsLeft());
+        containingActorGroup.get().removeMember(actorId);
+        return true;
     }
 }

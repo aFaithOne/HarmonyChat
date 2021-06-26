@@ -1,10 +1,15 @@
 package me.lumenowaty.harmonychat;
 
+import me.lumenowaty.harmonychat.systems.privategroupssystem.SocialGroup;
 import me.lumenowaty.harmonychat.utils.ChatUtils;
 import me.lumenowaty.harmonychat.utils.YamlConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 public class MessagesController {
 
@@ -73,15 +78,6 @@ public class MessagesController {
     public String privateMessageIgnored(String target) {
         return formatMessage("privateMessage.ignored")
                 .replaceAll("%target%", target);
-    }
-
-    /**
-     Messages from AntiSpamController
-     */
-
-    public String messageCoolDown(int seconds) {
-        return formatMessage("messagesAntiSpam.cooldown")
-                .replaceAll("%time%", String.valueOf(seconds));
     }
 
     /**
@@ -238,12 +234,76 @@ public class MessagesController {
         return formatMessage("privateGroup.inviteUsage");
     }
 
-    public String privateGroupsInviteSent() {
-        return formatMessage("privateGroup.inviteSent");
+    public String privateGroupsInviteSend() {
+        return formatMessage("privateGroup.inviteSend");
     }
 
     public String privateGroupsInviteReceived() {
         return formatMessage("privateGroup.inviteReceived");
+    }
+
+    public String privateGroupsNoInvitation() {
+        return formatMessage("privateGroup.noInvitation");
+    }
+
+    public String privateGroupsJoined() {
+        return formatMessage("privateGroup.joined");
+    }
+
+    public String privateGroupsInvalidGroup() {
+        return formatMessage("privateGroup.invalidGroup");
+    }
+
+    public String privateGroupsRemoveUsage() {
+        return formatMessage("privateGroup.removeUsage");
+    }
+
+    public String privateGroupsRemoved() {
+        return formatMessage("privateGroup.removed");
+    }
+
+    public String privateGroupsKicked() {
+        return formatMessage("privateGroup.kicked");
+    }
+
+    public String privateGroupsPrefixReceive(Player actor, String message) {
+        return formatMessage("privateGroup.prefixReceive")
+                .replaceAll("%message%", message)
+                .replaceAll("%actor%", actor.getDisplayName());
+    }
+
+    public String privateGroupsPrefixSend(String message) {
+        return formatMessage("privateGroup.prefixSend")
+                .replaceAll("%message%", message);
+    }
+
+    public String privateGroupsNoReceivers() {
+        return formatMessage("privateGroup.noReceivers");
+    }
+
+    public String privateGroupsAsAdminUsage() {
+        return formatMessage("privateGroup.asAdminUsage");
+    }
+
+    public String privateGroupsList() {
+        return formatMessage("privateGroup.groupsList");
+    }
+
+    public String privateGroupsAsAdminDeleteUsage() {
+        return formatMessage("privateGroup.asAdminDeleteUsage");
+    }
+
+    public String privateGroupsAsAdminDeleted() {
+        return formatMessage("privateGroup.asAdminDeleted");
+    }
+
+    public String privateGroupsInfo(SocialGroup socialGroup) {
+        UUID groupAdmin = socialGroup.getGroupAdmin();
+        System.out.println(socialGroup.getGroupMembers().getList());
+        return formatMessageList("privateGroup.info")
+                .replaceAll("%id", String.valueOf(groupAdmin))
+                .replaceAll("%actor%", Objects.requireNonNull(Bukkit.getOfflinePlayer(groupAdmin).getName()))
+                .replaceAll("%members%", socialGroup.getGroupMembers().toString());
     }
 }
 

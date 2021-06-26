@@ -17,6 +17,9 @@ public class AutoMessageTask extends HRepeatingTask {
     private final AutoMessageManager manager;
     private final int displayTime;
 
+    private BossBar bossBar;
+    private AutoMessageDisplayTask displayTask;
+
     public AutoMessageTask(int period, int delayed, int displayTime, AutoMessageManager manager) {
         super(period, delayed);
         this.manager = manager;
@@ -44,13 +47,18 @@ public class AutoMessageTask extends HRepeatingTask {
         }.runTaskTimerAsynchronously(HarmonyChat.getInstance(), 20L*delayed, 20L*period).getTaskId();
     }
 
+    public void clear() {
+        bossBar.removeAll();
+        Bukkit.getScheduler().cancelTask(displayTask.getId());
+    }
+
     private void sendMessage(String message) {
-        BossBar bossBar = Bukkit.createBossBar(message, BarColor.PURPLE, BarStyle.SEGMENTED_10);
+        bossBar = Bukkit.createBossBar(message, BarColor.PURPLE, BarStyle.SEGMENTED_10);
 
         Bukkit.getOnlinePlayers().forEach(bossBar::addPlayer);
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
-        AutoMessageDisplayTask displayTask = new AutoMessageDisplayTask(bossBar, 0, 1, this.displayTime);
+        displayTask = new AutoMessageDisplayTask(bossBar, 0, 1, this.displayTime);
 
         displayTask.run();
 

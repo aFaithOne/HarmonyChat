@@ -2,6 +2,7 @@ package me.lumenowaty.harmonychat.components;
 
 import me.lumenowaty.harmonychat.components.interfaces.Listable;
 
+import java.io.BufferedInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,5 +42,16 @@ public final class HList<T> implements Listable<T>, Serializable {
     @Override
     public List<T> getList() {
         return this.list;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for (T p : list) {
+            builder.append(p);
+        }
+
+        return builder.toString();
     }
 }

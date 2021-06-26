@@ -7,12 +7,10 @@ import java.util.UUID;
 
 public class SocialGroup implements Serializable {
 
-    private final int id;
     private final HList<UUID> groupMembers;
     private final UUID groupAdmin;
 
-    public SocialGroup(int nameId, UUID groupAdmin) {
-        this.id = nameId;
+    public SocialGroup(UUID groupAdmin) {
         this.groupMembers = new HList<>();
         this.groupAdmin = groupAdmin;
     }
@@ -26,12 +24,9 @@ public class SocialGroup implements Serializable {
     }
 
     public boolean containsMember(UUID uuid) {
-        return this.groupMembers.contains(uuid);
+        return this.groupMembers.contains(uuid) || this.groupAdmin.equals(uuid);
     }
 
-    public int getId() {
-        return id;
-    }
 
     public HList<UUID> getGroupMembers() {
         return groupMembers;
@@ -39,5 +34,9 @@ public class SocialGroup implements Serializable {
 
     public UUID getGroupAdmin() {
         return groupAdmin;
+    }
+
+    public boolean isPlayerAdmin(UUID uuid) {
+        return groupAdmin.equals(uuid);
     }
 }

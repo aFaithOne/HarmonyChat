@@ -30,7 +30,7 @@ public class GroupInviteSubCommand extends HSubCommand<GroupCommand> {
             return false;
         }
 
-        if (args.length == 1) {
+        if (args.length < 2) {
             actor.sendMessage(messages.privateGroupsInviteUsage());
             return false;
         }
@@ -45,7 +45,7 @@ public class GroupInviteSubCommand extends HSubCommand<GroupCommand> {
         Player target = playerOptional.get();
         HMap<UUID, UUID> invitationMap = socialGroupManager.getInvitationHolder().getInvitationMap();
 
-        actor.sendMessage(messages.privateGroupsInviteSent());
+        actor.sendMessage(messages.privateGroupsInviteSend());
         target.sendMessage(messages.privateGroupsInviteReceived());
         Bukkit.getScheduler().scheduleSyncDelayedTask(HarmonyChat.getInstance(),() -> invitationMap.remove(target.getUniqueId()),  20L*30);
         invitationMap.put(target.getUniqueId(), actor.getUniqueId());

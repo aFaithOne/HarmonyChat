@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 public class SocialGroupManager extends HController {
 
@@ -51,12 +51,17 @@ public class SocialGroupManager extends HController {
     }
 
     public Optional<SocialGroup> getSocialGroupOfPlayer(Player player) {
+        SocialGroup[] group = new SocialGroup[1];
         Map<UUID, SocialGroup> map = socialGroupsHolder.getSocialGroups().getMap();
+        Set<UUID> uuids = map.keySet();
 
-        final SocialGroup[] group = new SocialGroup[1];
-        Stream.of(map).forEach(s -> {
+        uuids.forEach(s -> {
             SocialGroup socialGroup = map.get(s);
-            if (socialGroup.containsMember(player.getUniqueId())) group[0] = socialGroup;
+            UUID playerId = player.getUniqueId();
+
+            if (socialGroup.containsMember(playerId)) {
+                group[0] = socialGroup;
+            }
         });
 
         return Optional.ofNullable(group[0]);
