@@ -1,7 +1,7 @@
 name: HarmonyChat
 version: ${project.version}
 main: me.lumenowaty.harmonychat.HarmonyChat
-api-version: 1.16
+api-version: 1.17
 authors: [ LumenowatyDev ]
 description: This plugin allow you to moderate chat.
 website: www.minestory.pl
