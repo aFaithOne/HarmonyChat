@@ -1,5 +1,6 @@
 package me.lumenowaty.harmonychat.systems.globalchatsystem.subcommands;
 
+import me.lumenowaty.harmonychat.HarmonyChat;
 import me.lumenowaty.harmonychat.MessagesController;
 import me.lumenowaty.harmonychat.components.HStatus;
 import me.lumenowaty.harmonychat.components.HSubCommand;
@@ -16,7 +17,7 @@ public class ChatOnSubCommand extends HSubCommand<ChatCommand> {
 
     @Override
     public boolean onSubCommand(CommandSender sender, Command command, String label, String[] args, MessagesController messages) {
-        HStatus chatStatus = commandExecutor.getChatManager().getChatStatus();
+        HStatus chatStatus = HarmonyChat.getController().getChatManager().getChatStatus();
 
         chatStatus.setStatus(true);
         chatStatus.setDescription("");

@@ -1,5 +1,6 @@
 package me.lumenowaty.harmonychat.systems.globalchatsystem.subcommands;
 
+import me.lumenowaty.harmonychat.HarmonyChat;
 import me.lumenowaty.harmonychat.MessagesController;
 import me.lumenowaty.harmonychat.components.HStatus;
 import me.lumenowaty.harmonychat.components.HSubCommand;
@@ -23,7 +24,7 @@ public class ChatOffSubCommand extends HSubCommand<ChatCommand> {
         }
 
         String description = ChatUtils.buildMessage(args, 1, args.length);
-        HStatus chatStatus = commandExecutor.getChatManager().getChatStatus();
+        HStatus chatStatus = HarmonyChat.getController().getChatManager().getChatStatus();
 
         chatStatus.setStatus(false);
         chatStatus.setDescription(description);

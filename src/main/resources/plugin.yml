@@ -33,5 +33,5 @@ permissions:
         default: op
       reload:
         default: op
-      group:
+      groups:
         default: op

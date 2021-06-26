@@ -1,43 +1,43 @@
 global:
-  inGameCommand: '&cKomenda dostępna tylko dla graczy.'
-  noPermission: '&cBrak uprawnień do użycia tej komendy.'
-  offlinePlayer: '&cPodany gracz jest offline.'
+  inGameCommand: '&8[&6HChat&8] &cKomenda dostępna tylko dla graczy.'
+  noPermission: '&8[&6HChat&8] &cBrak uprawnień do użycia tej komendy.'
+  offlinePlayer: '&8[&6HChat&8] &cPodany gracz jest offline.'
 
 privateMessage:
-  usage: '&fPoprawne użycie komendy: &b/pm <gracz> <wiadomość>'
+  usage: '&8[&6HChat&8] &fPoprawne użycie komendy: &b/pm <gracz> <wiadomość>'
   receive: '&3[&b%actor% &f-> &bJa&3] &7%message%'
   send: '&3[&bJa &f-> &b%target%&3] &7%message%'
-  ignored: '&cNie możesz wysłać wiadomości do &7%target%&c.'
+  ignored: '&8[&6HChat&8] &cNie możesz wysłać wiadomości do &7%target%&c.'
 
 ignore:
-  usage: '&fPoprawne użycie komendy: &b/ignore <gracz>'
-  added: '&aDodano &7%target% &fdo ignorowanych.'
-  removed: '&cUsunięto &7%target% &fz &fignorowanych&f.'
-  list: '&6Lista osób ignorowanych: &7'
-  notAllowed: '&cNie możesz zablokować tego gracza.'
+  usage: '&8[&6HChat&8] &fPoprawne użycie komendy: &b/ignore <gracz>'
+  added: '&8[&6HChat&8] &aDodano &7%target% &fdo ignorowanych.'
+  removed: '&8[&6HChat&8] &cUsunięto &7%target% &fz &fignorowanych&f.'
+  list: '&8[&6HChat&8] &6Lista osób ignorowanych: &7'
+  notAllowed: '&8[&6HChat&8] &cNie możesz zablokować tego gracza.'
 
 messagesAntiSpam:
-  cooldown: '&cAby wysłać ponownie wiadomość, musisz odczekać &6%time% &csekund.'
+  cooldown: '&8[&6HChat&8] &cAby wysłać ponownie wiadomość, musisz odczekać &6%time% &csekund.'
 
 reply:
-  usage: '&fPoprawne użycie komendy: &b/reply <wiadomość>'
-  offlinePlayer: '&fGracz, któremu próbujesz odpisać, jest poza serwerem.'
-  noPlayerToReply: '&cNie masz komu odpisać.'
+  usage: '&8[&6HChat&8] &fPoprawne użycie komendy: &b/reply <wiadomość>'
+  offlinePlayer: '&8[&6HChat&8] &fGracz, któremu próbujesz odpisać, jest poza serwerem.'
+  noPlayerToReply: '&8[&6HChat&8] &cNie masz komu odpisać.'
 
 chat:
-  usage: '&fPoprawne użycie komendy: &b/chat <clear/off/on/reload>'
+  usage: '&8[&6HChat&8] &fPoprawne użycie komendy: &b/chat <clear/off/on/reload>'
   cleared:
     - ' '
     - '&c&l> &a&lMineStory.pl &f&l- Kwadratowa Przygoda!'
     - '&c&l> &6&lCzat został wyczyszczony przez Administrację.'
     - ' '
-  offUsage: '&fPoprawne użycie komendy: &b/chat off <powód>'
+  offUsage: '&8[&6HChat&8] &fPoprawne użycie komendy: &b/chat off <powód>'
   disabled:
     - ' '
     - '&c&l> &a&lMineStory.pl &f&l- Kwadratowa Przygoda!'
     - '&c&l> &6&lCzat został wyłączony. Powód wyłączenia: &7&l%description%'
     - ' '
-  disable: '&cCzat jest obecnie wyłączony, z powodu: &7%description%'
+  disable: '&8[&6HChat&8] &cCzat jest obecnie wyłączony, z powodu: &7%description%'
   enabled:
     - ' '
     - '&c&l> &a&lMineStory.pl &f&l- Kwadratowa Przygoda!'
@@ -45,14 +45,24 @@ chat:
     - ' '
   broadcast:
     - ' '
-    - '&c&l> &a&lMineStory.pl &f&l- Kwadratowa Przygoda!'
+    - '&c&l> &a&lOgłoszenie &f&l- SkyBlock'
     - '&c&l> &3&l%message%'
     - ' '
-  broadcastUsage: '&fPoprawne użycie komendy: &b/broadcast <wiadomość>'
+  broadcastUsage: '&8[&6HChat&8] &fPoprawne użycie komendy: &b/broadcast <wiadomość>'
   reloaded: '&a&lHarmonyChat &6- Plugin został przeładowany.'
 
 antiSpam:
-  timeout: '&cNastępną wiadomość możesz wysłać za &6%time% &csekund.'
+  timeout: '&8[&6HChat&8] &cNastępną wiadomość możesz wysłać za &6%time% &csekund.'
 
 privateGroup:
-  usage: '&fPoprawne użycie komendy: &b/group <create/delete/join/leave/invite/remove>'
+  usage: '&8[&6HChat&8] &fPoprawne użycie komendy: &b/group <create/delete/join/leave/invite/remove>'
+  alreadyAMember: '&8[&6HChat&8] &fJesteś obecnie w grupie. Aby zmienić lub utworzyć nową, wpisz &b/group leave'
+  created: '&8[&6HChat&8] &aUtworzono &fgrupę. Dodaj członków, wysyłając zaproszenie &b/group invite <nick>'
+  ownerCommand: '&8[&6HChat&8] &fTa komenda jest przeznaczona dla właścicieli grupy.'
+  deleted: '&8[&6HChat&8] &fGrupa została &cusunięta&f.'
+  left: '&8[&6HChat&8] &fOpuszczono grupę.'
+  notForOwner: '&8[&6HChat&8] &fTa komenda nie jest dostępna dla założyciela grupy.'
+  noGroup: '&8[&6HChat&8] &fNie należysz do żadnej grupy.'
+  inviteUsage: '&8[&6HChat&8] &fPoprawne użycie komendy: &b/group invite <gracz>'
+  inviteSent: '&8[&6HChat&8] &fZaproszenie do grupy zostało wysłane.'
+  inviteReceived: '&8[&6HChat&8] &fOtrzymano zaproszenie do grupy. Aby zaakceptować wpisz &b/group join'

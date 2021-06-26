@@ -1,19 +1,54 @@
 package me.lumenowaty.harmonychat.systems.privategroupssystem.subcommands;
 
+import me.lumenowaty.harmonychat.HarmonyChat;
 import me.lumenowaty.harmonychat.MessagesController;
+import me.lumenowaty.harmonychat.components.HMap;
 import me.lumenowaty.harmonychat.components.HSubCommand;
-import me.lumenowaty.harmonychat.systems.privategroupssystem.GroupMessageCommand;
+import me.lumenowaty.harmonychat.systems.privategroupssystem.*;
+import me.lumenowaty.harmonychat.utils.HarmonyUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-public class GroupInviteSubCommand extends HSubCommand<GroupMessageCommand> {
+import java.util.Optional;
+import java.util.UUID;
 
-    public GroupInviteSubCommand(GroupMessageCommand commandExecutor) {
+public class GroupInviteSubCommand extends HSubCommand<GroupCommand> {
+
+    public GroupInviteSubCommand(GroupCommand commandExecutor) {
         super(commandExecutor);
     }
 
     @Override
     public boolean onSubCommand(CommandSender sender, Command command, String label, String[] args, MessagesController messages) {
-        return false;
+        Player actor = (Player) sender;
+        SocialGroupManager socialGroupManager = HarmonyChat.getController().getSocialGroupManager();
+
+        if (! socialGroupManager.isPlayerOwnerOfGroup(actor)) {
+            actor.sendMessage(messages.privateGroupsOwnerCommand());
+            return false;
+        }
+
+        if (args.length == 1) {
+            actor.sendMessage(messages.privateGroupsInviteUsage());
+            return false;
+        }
+
+        Optional<Player> playerOptional = HarmonyUtils.getPlayerByName(args[1]);
+
+        if (! playerOptional.isPresent()) {
+            actor.sendMessage(messages.offlinePlayer());
+            return false;
+        }
+
+        Player target = playerOptional.get();
+        HMap<UUID, UUID> invitationMap = socialGroupManager.getInvitationHolder().getInvitationMap();
+
+        actor.sendMessage(messages.privateGroupsInviteSent());
+        target.sendMessage(messages.privateGroupsInviteReceived());
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HarmonyChat.getInstance(),() -> invitationMap.remove(target.getUniqueId()),  20L*30);
+        invitationMap.put(target.getUniqueId(), actor.getUniqueId());
+        return true;
     }
 }

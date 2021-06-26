@@ -206,5 +206,44 @@ public class MessagesController {
         return formatMessage("privateGroup.usage");
     }
 
+    public String privateGroupsMemberAlready() {
+        return formatMessage("privateGroup.alreadyAMember");
+    }
+
+    public String privateGroupsCreated() {
+        return formatMessage("privateGroup.created");
+    }
+
+    public String privateGroupsOwnerCommand() {
+        return formatMessage("privateGroup.ownerCommand");
+    }
+
+    public String privateGroupsDeleted() {
+        return formatMessage("privateGroup.deleted");
+    }
+
+    public String privateGroupsLeft() {
+        return formatMessage("privateGroup.left");
+    }
+
+    public String privateGroupsNotForOwner() {
+        return formatMessage("privateGroup.notForOwner");
+    }
+
+    public String privateGroupsNoGroup() {
+        return formatMessage("privateGroup.noGroup");
+    }
+
+    public String privateGroupsInviteUsage() {
+        return formatMessage("privateGroup.inviteUsage");
+    }
+
+    public String privateGroupsInviteSent() {
+        return formatMessage("privateGroup.inviteSent");
+    }
+
+    public String privateGroupsInviteReceived() {
+        return formatMessage("privateGroup.inviteReceived");
+    }
 }
 

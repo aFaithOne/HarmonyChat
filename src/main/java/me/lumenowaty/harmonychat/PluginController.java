@@ -6,6 +6,7 @@ import me.lumenowaty.harmonychat.systems.globalchatsystem.BroadcastCommand;
 import me.lumenowaty.harmonychat.systems.globalchatsystem.ChatCommand;
 import me.lumenowaty.harmonychat.systems.globalchatsystem.ChatListener;
 import me.lumenowaty.harmonychat.systems.globalchatsystem.ChatManager;
+import me.lumenowaty.harmonychat.systems.privategroupssystem.GroupCommand;
 import me.lumenowaty.harmonychat.systems.privategroupssystem.SocialGroupManager;
 import me.lumenowaty.harmonychat.systems.privatemessagessystem.IgnorePlayerCommand;
 import me.lumenowaty.harmonychat.systems.privatemessagessystem.PrivateMessageCommand;
@@ -56,6 +57,7 @@ public class PluginController {
         this.main.getCommand("reply").setExecutor(new ReplyMessageCommand(this));
         this.main.getCommand("chat").setExecutor(new ChatCommand(this));
         this.main.getCommand("broadcast").setExecutor(new BroadcastCommand(this));
+        this.main.getCommand("group").setExecutor(new GroupCommand(this));
     }
 
     public void loadTabCompleters() {
@@ -103,11 +105,13 @@ public class PluginController {
         this.privateMessageManager.loadComponents();
         this.chatManager.loadComponents();
         this.antiSpamManager.load();
+        this.socialGroupManager.loadComponents();
     }
 
     public void stopComponents() {
         this.autoMessagesManager.getAutoMessageTask().stop();
         this.privateMessageManager.saveComponents();
+        this.socialGroupManager.saveComponents();
     }
 
     public YamlConfig getMainConfig() {
@@ -136,5 +140,9 @@ public class PluginController {
 
     public AntiSpamManager getAntiSpamManager() {
         return antiSpamManager;
+    }
+
+    public SocialGroupManager getSocialGroupManager() {
+        return socialGroupManager;
     }
 }

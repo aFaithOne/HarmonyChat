@@ -2,16 +2,17 @@ package me.lumenowaty.harmonychat.systems.privategroupssystem;
 
 import me.lumenowaty.harmonychat.components.HList;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class SocialGroup {
+public class SocialGroup implements Serializable {
 
-    private final int nameId;
+    private final int id;
     private final HList<UUID> groupMembers;
     private final UUID groupAdmin;
 
     public SocialGroup(int nameId, UUID groupAdmin) {
-        this.nameId = nameId;
+        this.id = nameId;
         this.groupMembers = new HList<>();
         this.groupAdmin = groupAdmin;
     }
@@ -28,8 +29,8 @@ public class SocialGroup {
         return this.groupMembers.contains(uuid);
     }
 
-    public int getNameId() {
-        return nameId;
+    public int getId() {
+        return id;
     }
 
     public HList<UUID> getGroupMembers() {

@@ -16,11 +16,9 @@ import java.util.List;
 
 public class ChatCommand extends HCommandExecutor implements TabCompleter {
 
-    private final ChatManager chatManager;
 
     public ChatCommand(PluginController controller) {
         super(controller);
-        this.chatManager = controller.getChatManager();
     }
 
     @Override
@@ -51,10 +49,6 @@ public class ChatCommand extends HCommandExecutor implements TabCompleter {
                 break;
         }
         return false;
-    }
-
-    public ChatManager getChatManager() {
-        return chatManager;
     }
 
     @Override

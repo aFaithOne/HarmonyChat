@@ -86,7 +86,9 @@ public class ChatListener extends HListener {
 
         factory.prepareFormat();
         String format = factory.getFormat();
-        String s = ChatUtils.formatText(format.replaceAll("%MESSAGE%", message));
+        String s = ChatUtils.formatText(format
+                .replaceAll("%MESSAGE%", message)
+                .replaceAll("%NEMAE%", player.getDisplayName()));
 
         event.setFormat(s);
     }

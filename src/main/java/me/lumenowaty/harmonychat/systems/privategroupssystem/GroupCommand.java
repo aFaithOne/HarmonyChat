@@ -6,11 +6,15 @@ import me.lumenowaty.harmonychat.components.HCommandExecutor;
 import me.lumenowaty.harmonychat.systems.privategroupssystem.subcommands.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-public class GroupMessageCommand extends HCommandExecutor {
+import java.util.Arrays;
+import java.util.List;
 
-    public GroupMessageCommand(PluginController controller) {
+public class GroupCommand extends HCommandExecutor implements TabCompleter {
+
+    public GroupCommand(PluginController controller) {
         super(controller);
     }
 
@@ -53,5 +57,12 @@ public class GroupMessageCommand extends HCommandExecutor {
                 break;
         }
         return false;
+    }
+
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (args.length == 1) return Arrays.asList("create", "delete", "join", "leave", "invite", "remove");
+        return null;
     }
 }

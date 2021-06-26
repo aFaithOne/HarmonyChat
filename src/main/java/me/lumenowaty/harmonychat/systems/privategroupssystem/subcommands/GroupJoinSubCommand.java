@@ -2,13 +2,13 @@ package me.lumenowaty.harmonychat.systems.privategroupssystem.subcommands;
 
 import me.lumenowaty.harmonychat.MessagesController;
 import me.lumenowaty.harmonychat.components.HSubCommand;
-import me.lumenowaty.harmonychat.systems.privategroupssystem.GroupMessageCommand;
+import me.lumenowaty.harmonychat.systems.privategroupssystem.GroupCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-public class GroupJoinSubCommand extends HSubCommand<GroupMessageCommand> {
+public class GroupJoinSubCommand extends HSubCommand<GroupCommand> {
 
-    public GroupJoinSubCommand(GroupMessageCommand commandExecutor) {
+    public GroupJoinSubCommand(GroupCommand commandExecutor) {
         super(commandExecutor);
     }
 

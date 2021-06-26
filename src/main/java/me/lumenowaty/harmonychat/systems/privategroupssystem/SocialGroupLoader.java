@@ -12,8 +12,9 @@ public class SocialGroupLoader extends HLoader {
 
     private SocialGroupsHolder holder;
 
-    public SocialGroupLoader(String fileName) {
-        super(fileName);
+    public SocialGroupLoader(SocialGroupsHolder holder) {
+        super("socialGroups.ser");
+        this.holder = holder;
     }
 
     public void load() {
@@ -30,10 +31,10 @@ public class SocialGroupLoader extends HLoader {
             in.close();
             file.close();
 
-            logger.info(HARMONY_CHAT_PREFIX + " GroupMessageMap has been deserialized.");
+            logger.info(HARMONY_CHAT_PREFIX + " SocialGroupsMap has been deserialized.");
         } catch (IOException ex) {
             this.holder = new SocialGroupsHolder();
-            logger.info(HARMONY_CHAT_PREFIX + " could not load GroupMessageMap");
+            logger.info(HARMONY_CHAT_PREFIX + " could not load SocialGroupsMap");
         } catch (ClassNotFoundException ex) {
             logger.info(HARMONY_CHAT_PREFIX + " Not found a class.");
         }
@@ -48,7 +49,7 @@ public class SocialGroupLoader extends HLoader {
             out.writeObject(holder);
             out.close();
             file.close();
-            logger.info(HARMONY_CHAT_PREFIX + " GroupMessageMap has been serialized.");
+            logger.info(HARMONY_CHAT_PREFIX + " SocialGroupsMap has been serialized.");
 
         } catch (IOException ex) {
             logger.info(HARMONY_CHAT_PREFIX + " some problems with IOException.");

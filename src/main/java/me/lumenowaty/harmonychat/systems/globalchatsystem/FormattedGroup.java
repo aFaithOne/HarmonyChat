@@ -1,5 +1,7 @@
 package me.lumenowaty.harmonychat.systems.globalchatsystem;
 
+import me.lumenowaty.harmonychat.HarmonyChat;
+import me.lumenowaty.harmonychat.PluginController;
 import org.bukkit.entity.Player;
 
 public class FormattedGroup {
@@ -11,13 +13,20 @@ public class FormattedGroup {
         this.format = format;
     }
 
-    public String getFormat(Player player) {
-        return format
-                .replaceAll("%NAME%", player.getName());
+    public String getFormat() {
+        return format;
     }
 
-    public static String DEFAULT_FORMAT(Player player) {
-        return DEFAULT
-                .replaceAll("%NAME%", player.getName());
+    public static String DEFAULT_FORMAT() {
+        PluginController controller = HarmonyChat.getController();
+        String string = controller.getMainConfig().getConfig().getString("globalChatFormat.groups.default");
+        String format;
+        if (string == null) {
+            format = DEFAULT;
+        } else {
+            format = string;
+        }
+
+        return format;
     }
 }

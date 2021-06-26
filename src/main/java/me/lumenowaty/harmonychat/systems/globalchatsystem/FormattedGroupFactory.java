@@ -1,8 +1,10 @@
 package me.lumenowaty.harmonychat.systems.globalchatsystem;
 
 import me.lumenowaty.harmonychat.HarmonyChat;
+import me.lumenowaty.harmonychat.PluginController;
 import me.lumenowaty.harmonychat.components.HMap;
 import net.milkbowl.vault.chat.Chat;
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -21,20 +23,21 @@ public class FormattedGroupFactory {
         ChatManager chatManager = HarmonyChat.getController().getChatManager();
         World world = player.getWorld();
         Chat chat = chatManager.getChat();
-        String[] playerGroups = chat.getPlayerGroups(player);
-        String groupPrefix = chat.getGroupPrefix(world, playerGroups[0]);
-        HMap<String, FormattedGroup> formattedGroupMap = chatManager.getFormattedGroupsHolder().getFormattedGroupMap();
-        Optional<FormattedGroup> byKey = formattedGroupMap.getByKey(groupPrefix);
+        try {
+            String[] playerGroups = chat.getPlayerGroups(player);
+            String groupPrefix = chat.getGroupPrefix(world, playerGroups[0]);
+            HMap<String, FormattedGroup> formattedGroupMap = chatManager.getFormattedGroupsHolder().getFormattedGroupMap();
+            Optional<FormattedGroup> byKey = formattedGroupMap.getByKey(groupPrefix);
 
-        if (! byKey.isPresent()) {
-            format = FormattedGroup.DEFAULT_FORMAT(player);
-        } else {
-            format = byKey.get().getFormat(player);
+            byKey.ifPresent(formattedGroup -> format = formattedGroup.getFormat());
+        } catch (NullPointerException ex) {
+            Bukkit.getLogger().info(PluginController.HARMONY_CHAT_PREFIX + " cannot find ranks plugin.");
         }
+
     }
 
     public String getFormat() {
-        if (format == null) return FormattedGroup.DEFAULT_FORMAT(player);
+        if (format == null) return FormattedGroup.DEFAULT_FORMAT();
 
         return format;
     }
