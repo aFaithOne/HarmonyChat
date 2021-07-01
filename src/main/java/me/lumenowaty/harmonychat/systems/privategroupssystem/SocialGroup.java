@@ -16,15 +16,15 @@ public class SocialGroup implements Serializable {
     }
 
     public void addMember(UUID uuid) {
-        this.groupMembers.add(uuid);
+        groupMembers.add(uuid);
     }
 
     public void removeMember(UUID uuid) {
-        this.groupMembers.remove(uuid);
+        groupMembers.remove(uuid);
     }
 
     public boolean containsMember(UUID uuid) {
-        return this.groupMembers.contains(uuid) || this.groupAdmin.equals(uuid);
+        return (groupMembers.contains(uuid) || groupAdmin.equals(uuid));
     }
 
 

@@ -24,7 +24,7 @@ public class GroupJoinSubCommand extends HSubCommand<GroupCommand> {
         Player actor = (Player) sender;
         SocialGroupManager socialGroupManager = HarmonyChat.getController().getSocialGroupManager();
 
-        if (socialGroupManager.isPlayerOwnerOfGroup(actor) || socialGroupManager.isPlayerInGroup(actor)) {
+        if (socialGroupManager.isPlayerInGroup(actor)) {
             actor.sendMessage(messages.privateGroupsMemberAlready());
             return false;
         }

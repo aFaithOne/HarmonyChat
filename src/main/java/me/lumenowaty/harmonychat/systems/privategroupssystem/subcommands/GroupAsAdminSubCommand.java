@@ -17,6 +17,11 @@ public class GroupAsAdminSubCommand extends HSubCommand<GroupCommand> {
     @Override
     public boolean onSubCommand(CommandSender sender, Command command, String label, String[] args, MessagesController messages) {
 
+        if (! sender.hasPermission("harmony.chat.moderate")) {
+            sender.sendMessage(messages.noPermission());
+            return false;
+        }
+        
         if (args.length < 2) {
             sender.sendMessage(messages.privateGroupsAsAdminUsage());
             return false;

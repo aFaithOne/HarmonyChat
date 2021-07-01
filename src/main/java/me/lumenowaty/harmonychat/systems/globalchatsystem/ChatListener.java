@@ -4,6 +4,7 @@ import me.lumenowaty.harmonychat.MessagesController;
 import me.lumenowaty.harmonychat.PluginController;
 import me.lumenowaty.harmonychat.components.HListener;
 import me.lumenowaty.harmonychat.systems.antispamsystem.AntiSpamChecker;
+import me.lumenowaty.harmonychat.systems.privategroupssystem.SocialGroupUtil;
 import me.lumenowaty.harmonychat.utils.ChatUtils;
 import me.lumenowaty.harmonychat.utils.HarmonyUtils;
 import org.bukkit.Sound;
@@ -33,8 +34,9 @@ public class ChatListener extends HListener {
 
         String message = event.getMessage();
 
-        this.setFormat(actor.getPlayer(), message, event);
-        this.pokeMessage(message);
+        this.checkFroGroupMessage(actor, message, event);
+        this.setFormat(actor, message, event);
+        this.checkForPoke(message);
     }
 
     @EventHandler
@@ -50,7 +52,7 @@ public class ChatListener extends HListener {
         actor.sendMessage(messages.chatOffDisable(chatManager.getChatStatus().getDescription()));
     }
 
-    private void pokeMessage(String message) {
+    private void checkForPoke(String message) {
         if (! message.contains("@")) return;
 
         String[] names = Arrays.stream(message.split(" "))
@@ -86,10 +88,20 @@ public class ChatListener extends HListener {
 
         factory.prepareFormat();
         String format = factory.getFormat();
+
         String s = ChatUtils.formatText(format
                 .replaceAll("%MESSAGE%", message)
-                .replaceAll("%NEMAE%", player.getDisplayName()));
-
+                .replaceAll("%NAME%", player.getDisplayName()));
+        System.out.println(s);
         event.setFormat(s);
+    }
+
+    private void checkFroGroupMessage(Player player, String message, AsyncPlayerChatEvent event) {
+        if (! (message.startsWith("[") && message.endsWith("]"))) return;
+
+        event.setCancelled(true);
+        SocialGroupUtil.sendMessageToGroup(player, message
+                .replaceAll(String.valueOf(91), "")
+                .replaceAll(String.valueOf(93), ""));
     }
 }

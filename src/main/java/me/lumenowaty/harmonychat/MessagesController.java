@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MessagesController {
 
@@ -299,11 +301,11 @@ public class MessagesController {
 
     public String privateGroupsInfo(SocialGroup socialGroup) {
         UUID groupAdmin = socialGroup.getGroupAdmin();
-        System.out.println(socialGroup.getGroupMembers().getList());
         return formatMessageList("privateGroup.info")
                 .replaceAll("%id", String.valueOf(groupAdmin))
                 .replaceAll("%actor%", Objects.requireNonNull(Bukkit.getOfflinePlayer(groupAdmin).getName()))
-                .replaceAll("%members%", socialGroup.getGroupMembers().toString());
+                .replaceAll("%members%", Stream.of(socialGroup.getGroupMembers()).map(
+                        s -> Bukkit.getOfflinePlayer(String.valueOf(s)).getName() + ", ").collect(Collectors.joining()));
     }
 }
 

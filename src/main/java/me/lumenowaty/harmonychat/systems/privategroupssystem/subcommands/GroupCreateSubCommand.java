@@ -26,7 +26,7 @@ public class GroupCreateSubCommand extends HSubCommand<GroupCommand> {
         HMap<UUID, SocialGroup> socialGroups = holder.getSocialGroups();
         UUID actorId = actor.getUniqueId();
 
-        if (socialGroups.containsKey(actorId)) {
+        if (socialGroupManager.isPlayerOwnerOfGroup(actor) || socialGroupManager.isPlayerInGroup(actor)) {
             actor.sendMessage(messages.privateGroupsMemberAlready());
             return false;
         }

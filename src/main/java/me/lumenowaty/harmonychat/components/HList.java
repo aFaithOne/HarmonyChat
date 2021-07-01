@@ -29,7 +29,7 @@ public final class HList<T> implements Listable<T>, Serializable {
 
     @Override
     public boolean contains(T s) {
-        return false;
+        return list.contains(s);
     }
 
     @Override
@@ -49,7 +49,7 @@ public final class HList<T> implements Listable<T>, Serializable {
         StringBuilder builder = new StringBuilder();
 
         for (T p : list) {
-            builder.append(p);
+            builder.append(p).append(", ");
         }
 
         return builder.toString();
