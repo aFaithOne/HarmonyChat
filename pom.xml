@@ -6,7 +6,7 @@
 
     <groupId>me.lumenowaty</groupId>
     <artifactId>HarmonyChat</artifactId>
-    <version>1.0.0-stable</version>
+    <version>1.0-testVersion</version>
     <packaging>jar</packaging>
 
     <name>HarmonyChat</name>

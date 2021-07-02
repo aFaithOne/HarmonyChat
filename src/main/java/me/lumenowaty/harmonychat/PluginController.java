@@ -4,7 +4,7 @@ import me.lumenowaty.harmonychat.systems.antispamsystem.AntiSpamManager;
 import me.lumenowaty.harmonychat.systems.automessagessystem.AutoMessageManager;
 import me.lumenowaty.harmonychat.systems.globalchatsystem.BroadcastCommand;
 import me.lumenowaty.harmonychat.systems.globalchatsystem.ChatCommand;
-import me.lumenowaty.harmonychat.systems.globalchatsystem.ChatListener;
+import me.lumenowaty.harmonychat.systems.ChatListener;
 import me.lumenowaty.harmonychat.systems.globalchatsystem.ChatManager;
 import me.lumenowaty.harmonychat.systems.privategroupssystem.GroupCommand;
 import me.lumenowaty.harmonychat.systems.privategroupssystem.SocialGroupManager;

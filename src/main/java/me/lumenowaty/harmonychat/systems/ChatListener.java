@@ -1,9 +1,11 @@
-package me.lumenowaty.harmonychat.systems.globalchatsystem;
+package me.lumenowaty.harmonychat.systems;
 
 import me.lumenowaty.harmonychat.MessagesController;
 import me.lumenowaty.harmonychat.PluginController;
 import me.lumenowaty.harmonychat.components.HListener;
 import me.lumenowaty.harmonychat.systems.antispamsystem.AntiSpamChecker;
+import me.lumenowaty.harmonychat.systems.globalchatsystem.ChatManager;
+import me.lumenowaty.harmonychat.systems.globalchatsystem.FormattedGroupFactory;
 import me.lumenowaty.harmonychat.systems.privategroupssystem.SocialGroupUtil;
 import me.lumenowaty.harmonychat.utils.ChatUtils;
 import me.lumenowaty.harmonychat.utils.HarmonyUtils;
@@ -92,7 +94,7 @@ public class ChatListener extends HListener {
         String s = ChatUtils.formatText(format
                 .replaceAll("%MESSAGE%", message)
                 .replaceAll("%NAME%", player.getDisplayName()));
-        System.out.println(s);
+
         event.setFormat(s);
     }
 
@@ -101,7 +103,7 @@ public class ChatListener extends HListener {
 
         event.setCancelled(true);
         SocialGroupUtil.sendMessageToGroup(player, message
-                .replaceAll(String.valueOf(91), "")
-                .replaceAll(String.valueOf(93), ""));
+                .replace("[", "")
+                .replace("]", ""));
     }
 }

@@ -304,8 +304,12 @@ public class MessagesController {
         return formatMessageList("privateGroup.info")
                 .replaceAll("%id", String.valueOf(groupAdmin))
                 .replaceAll("%actor%", Objects.requireNonNull(Bukkit.getOfflinePlayer(groupAdmin).getName()))
-                .replaceAll("%members%", Stream.of(socialGroup.getGroupMembers()).map(
-                        s -> Bukkit.getOfflinePlayer(String.valueOf(s)).getName() + ", ").collect(Collectors.joining()));
+                .replaceAll("%members%", socialGroup.getGroupMembers().getList().stream()
+                        .map(s -> Bukkit.getOfflinePlayer(s).getName() + ", ").collect(Collectors.joining()));
+    }
+
+    public String privateGroupsInviteReceivedHover() {
+        return formatMessage("privateGroup.inviteReceivedHover");
     }
 }
 

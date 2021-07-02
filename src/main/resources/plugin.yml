@@ -5,7 +5,6 @@ api-version: 1.17
 authors: [ LumenowatyDev ]
 description: This plugin allow you to moderate chat.
 website: www.minestory.pl
-softdepend: [LuckPerms]
 depend: [Vault]
 
 commands:
@@ -34,4 +33,6 @@ permissions:
       reload:
         default: op
       groups:
+        default: op
+      moderate:
         default: op
