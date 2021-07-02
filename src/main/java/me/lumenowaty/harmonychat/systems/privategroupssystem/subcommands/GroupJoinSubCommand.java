@@ -50,7 +50,7 @@ public class GroupJoinSubCommand extends HSubCommand<GroupCommand> {
         Optional<SocialGroup> sGByKey = socialGroups.getByKey(byKey.get());
 
         if (! sGByKey.isPresent()) {
-            actor.sendMessage(messages.privateGroupsInvalidGroup());
+            actor.sendMessage(messages.privateGroupsNotExistingNow());
             return false;
         }
 

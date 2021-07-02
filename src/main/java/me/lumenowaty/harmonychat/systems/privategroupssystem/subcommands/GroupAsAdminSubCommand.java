@@ -4,6 +4,7 @@ import me.lumenowaty.harmonychat.MessagesController;
 import me.lumenowaty.harmonychat.components.HSubCommand;
 import me.lumenowaty.harmonychat.systems.privategroupssystem.GroupCommand;
 import me.lumenowaty.harmonychat.systems.privategroupssystem.adminsubcommands.GroupAsAdminDeleteSubCommand;
+import me.lumenowaty.harmonychat.systems.privategroupssystem.adminsubcommands.GroupAsAdminInfoSubCommand;
 import me.lumenowaty.harmonychat.systems.privategroupssystem.adminsubcommands.GroupAsAdminListSubCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -32,6 +33,8 @@ public class GroupAsAdminSubCommand extends HSubCommand<GroupCommand> {
                 return new GroupAsAdminListSubCommand(commandExecutor).onSubCommand(sender, command, label, args, messages);
             case "delete":
                 return new GroupAsAdminDeleteSubCommand(commandExecutor).onSubCommand(sender, command, label, args, messages);
+            case "info":
+                return new GroupAsAdminInfoSubCommand(commandExecutor).onSubCommand(sender, command, label, args, messages);
             default:
                 sender.sendMessage(messages.privateGroupsAsAdminUsage());
                 return false;

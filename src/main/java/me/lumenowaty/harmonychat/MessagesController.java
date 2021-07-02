@@ -252,8 +252,8 @@ public class MessagesController {
         return formatMessage("privateGroup.joined");
     }
 
-    public String privateGroupsInvalidGroup() {
-        return formatMessage("privateGroup.invalidGroup");
+    public String privateGroupsNotExistingNow() {
+        return formatMessage("privateGroup.notExistingNow");
     }
 
     public String privateGroupsRemoveUsage() {
@@ -266,6 +266,10 @@ public class MessagesController {
 
     public String privateGroupsKicked() {
         return formatMessage("privateGroup.kicked");
+    }
+
+    public String privateGroupInvalidGroup() {
+        return formatMessage("privateGroup.invalidGroup");
     }
 
     public String privateGroupsPrefixReceive(Player actor, String message) {

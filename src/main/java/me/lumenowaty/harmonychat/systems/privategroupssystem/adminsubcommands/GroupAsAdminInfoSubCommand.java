@@ -12,11 +12,12 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import java.util.Optional;
 import java.util.UUID;
 
-public class GroupAsAdminDeleteSubCommand extends HSubCommand<GroupCommand> {
+public class GroupAsAdminInfoSubCommand extends HSubCommand<GroupCommand> {
 
-    public GroupAsAdminDeleteSubCommand(GroupCommand commandExecutor) {
+    public GroupAsAdminInfoSubCommand(GroupCommand commandExecutor) {
         super(commandExecutor);
     }
 
@@ -32,13 +33,14 @@ public class GroupAsAdminDeleteSubCommand extends HSubCommand<GroupCommand> {
 
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[2]);
         UUID uniqueId = offlinePlayer.getUniqueId();
+        Optional<SocialGroup> byKey = socialGroups.getByKey(uniqueId);
 
-        if (! socialGroups.containsKey(uniqueId)) {
+        if (! byKey.isPresent()) {
             sender.sendMessage(messages.privateGroupInvalidGroup());
             return false;
         }
 
-        sender.sendMessage(messages.privateGroupsAsAdminDeleted());
+        sender.sendMessage(messages.privateGroupsInfo(byKey.get()));
         socialGroups.remove(uniqueId);
         return true;
     }
