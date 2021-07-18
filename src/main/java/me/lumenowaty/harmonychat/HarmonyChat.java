@@ -1,5 +1,7 @@
 package me.lumenowaty.harmonychat;
 
+import me.lumenowaty.harmonychat.systems.pokesystem.Command.Poke;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class HarmonyChat extends JavaPlugin {
@@ -19,6 +21,9 @@ public final class HarmonyChat extends JavaPlugin {
     public void onDisable() {
         controller.saveComponents();
         controller.stopComponents();
+    }
+    public void RegisterCommands() {
+        getCommand("poke").setExecutor((CommandExecutor)new Poke(this));
     }
 
     public static HarmonyChat getInstance() {
