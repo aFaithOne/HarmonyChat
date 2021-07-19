@@ -82,6 +82,8 @@ privateGroup:
   groupsList: '&6Lista grup: (uuid : nazwa)'
   asAdminDeleteUsage: '&8[&6HChat&8] &fPoprawne użycie komendy: &b/group asadmin delete <gracz_Id>'
   asAdminDeleted: '&8[&6HChat&8] &fGrupa została &apomyślnie &fusunięta.'
+  socialGroupChatEnabled: '&8[&6HChat&8] &fZmieniono na czat grupowy.'
+  socialGroupChatDisabled: '&8[&6HChat&8] &fZmieniono na czat globalny.'
   info:
     - '&6ID grupy: &7%id%'
     - '&6Założyciel: &7%actor%'

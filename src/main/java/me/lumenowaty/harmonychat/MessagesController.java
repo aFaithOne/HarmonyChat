@@ -315,5 +315,13 @@ public class MessagesController {
     public String privateGroupsInviteReceivedHover() {
         return formatMessage("privateGroup.inviteReceivedHover");
     }
+
+    public String privateGroupsSocialGroupChatEnabled() {
+        return formatMessage("privateGroup.socialGroupChatEnabled");
+    }
+
+    public String privateGroupsSocialGroupChatDisabled() {
+        return formatMessage("privateGroup.socialGroupChatDisabled");
+    }
 }
 

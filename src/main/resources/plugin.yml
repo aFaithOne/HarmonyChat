@@ -1,7 +1,7 @@
 name: HarmonyChat
 version: ${project.version}
 main: me.lumenowaty.harmonychat.HarmonyChat
-api-version: 1.17
+api-version: 1.16
 authors: [ LumenowatyDev ]
 description: This plugin allow you to moderate chat.
 website: www.minestory.pl
@@ -20,19 +20,30 @@ commands:
     aliases: [grupa, g]
 
 permissions:
-  harmony:
-    chat:
-      bypass:
-        default: op
-      ignore:
-        default: op
-      reply:
-        default: op
-      antiignore:
-        default: op
-      reload:
-        default: op
-      groups:
-        default: op
-      moderate:
-        default: op
+  harmony.chat.*:
+    default: op
+    children:
+      moderate: true
+      groups: true
+      reload: true
+      antiignore: true
+      ignore: true
+      reply: true
+      bypass: true
+      chat: true
+  harmony.chat.chat:
+      default: op
+  harmony.chat.bypass:
+      default: op
+  harmony.chat.ignore:
+      default: op
+  harmony.chat.reply:
+      default: op
+  harmony.chat.antiignore:
+      default: op
+  harmony.chat.reload:
+      default: op
+  harmony.chat.groups:
+      default: op
+  harmony.chat.moderate:
+      default: op

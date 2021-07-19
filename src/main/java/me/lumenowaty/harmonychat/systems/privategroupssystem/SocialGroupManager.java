@@ -12,10 +12,12 @@ public class SocialGroupManager extends HController {
 
     private final SocialGroupsHolder socialGroupsHolder;
     private final GroupInvitationHolder invitationHolder;
+    private final SocialGroupPlayerStatusHolder socialGroupPlayerStatusHolder;
 
     public SocialGroupManager(PluginController controller) {
         super(controller);
 
+        socialGroupPlayerStatusHolder = new SocialGroupPlayerStatusHolder();
         invitationHolder = new GroupInvitationHolder();
         socialGroupsHolder = new SocialGroupsHolder();
     }
@@ -39,6 +41,10 @@ public class SocialGroupManager extends HController {
 
     public GroupInvitationHolder getInvitationHolder() {
         return invitationHolder;
+    }
+
+    public SocialGroupPlayerStatusHolder getSocialGroupPlayerStatusHolder() {
+        return socialGroupPlayerStatusHolder;
     }
 
     public boolean isPlayerInGroup(Player player) {

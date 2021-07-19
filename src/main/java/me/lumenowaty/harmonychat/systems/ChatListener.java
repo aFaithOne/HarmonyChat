@@ -2,10 +2,12 @@ package me.lumenowaty.harmonychat.systems;
 
 import me.lumenowaty.harmonychat.MessagesController;
 import me.lumenowaty.harmonychat.PluginController;
+import me.lumenowaty.harmonychat.components.HList;
 import me.lumenowaty.harmonychat.components.HListener;
 import me.lumenowaty.harmonychat.systems.antispamsystem.AntiSpamChecker;
 import me.lumenowaty.harmonychat.systems.globalchatsystem.ChatManager;
 import me.lumenowaty.harmonychat.systems.globalchatsystem.FormattedGroupFactory;
+import me.lumenowaty.harmonychat.systems.privategroupssystem.SocialGroupPlayerStatusHolder;
 import me.lumenowaty.harmonychat.systems.privategroupssystem.SocialGroupUtil;
 import me.lumenowaty.harmonychat.utils.ChatUtils;
 import me.lumenowaty.harmonychat.utils.HarmonyUtils;
@@ -17,6 +19,7 @@ import org.bukkit.event.server.BroadcastMessageEvent;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ChatListener extends HListener {
@@ -99,11 +102,14 @@ public class ChatListener extends HListener {
     }
 
     private void checkFroGroupMessage(Player player, String message, AsyncPlayerChatEvent event) {
-        if (! (message.startsWith("[") && message.endsWith("]"))) return;
+        SocialGroupPlayerStatusHolder status = controller.getSocialGroupManager().getSocialGroupPlayerStatusHolder();
+        HList<UUID> playersWithActiveSocialGroupStatus = status.getPlayersWithActiveSocialGroupStatus();
 
-        event.setCancelled(true);
-        SocialGroupUtil.sendMessageToGroup(player, message
-                .replace("[", "")
-                .replace("]", ""));
+        if (playersWithActiveSocialGroupStatus.contains(player.getUniqueId()) || (message.startsWith("[") && message.endsWith("]"))) {
+            event.setCancelled(true);
+            SocialGroupUtil.sendMessageToGroup(player, message
+                    .replace("[", "")
+                    .replace("]", ""));
+        }
     }
 }

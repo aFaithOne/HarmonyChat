@@ -63,13 +63,11 @@ public class IgnorePlayerCommand extends HCommandExecutor {
 
         Player target = targetByName.get();
         UUID targetId = target.getUniqueId();
-        //TODO: turn on this option on the end of tests
-        /*
+
         if (target.hasPermission("harmony.chat.antiIgnore")) {
             actor.sendMessage(messages.ignoreNotAllowed());
             return false;
         }
-        */
 
         if (! byKey.isPresent()) {
             Set<UUID> set = new HashSet<>();

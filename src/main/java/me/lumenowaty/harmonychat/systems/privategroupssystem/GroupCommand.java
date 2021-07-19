@@ -3,6 +3,7 @@ package me.lumenowaty.harmonychat.systems.privategroupssystem;
 import me.lumenowaty.harmonychat.MessagesController;
 import me.lumenowaty.harmonychat.PluginController;
 import me.lumenowaty.harmonychat.components.HCommandExecutor;
+import me.lumenowaty.harmonychat.components.HList;
 import me.lumenowaty.harmonychat.systems.privategroupssystem.subcommands.*;
 import me.lumenowaty.harmonychat.utils.ChatUtils;
 import org.bukkit.command.Command;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class GroupCommand extends HCommandExecutor implements TabCompleter {
 
@@ -36,8 +38,19 @@ public class GroupCommand extends HCommandExecutor implements TabCompleter {
         }
 
         if (args.length == 0) {
-            actor.sendMessage(messages.privateGroupUsage());
-            return false;
+            SocialGroupPlayerStatusHolder status = controller.getSocialGroupManager().getSocialGroupPlayerStatusHolder();
+            HList<UUID> playersWithActiveSocialGroupStatus = status.getPlayersWithActiveSocialGroupStatus();
+            UUID actorUUID = actor.getUniqueId();
+
+            if (! playersWithActiveSocialGroupStatus.contains(actorUUID)) {
+                playersWithActiveSocialGroupStatus.add(actorUUID);
+                actor.sendMessage(messages.privateGroupsSocialGroupChatEnabled());
+                return true;
+            }
+
+            actor.sendMessage(messages.privateGroupsSocialGroupChatDisabled());
+            playersWithActiveSocialGroupStatus.remove(actorUUID);
+            return true;
         }
 
         switch (args[0]) {
