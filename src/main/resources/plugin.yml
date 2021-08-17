@@ -1,6 +1,6 @@
 name: HarmonyChat
 version: ${project.version}
-main: me.lumenowaty.harmonychat.HarmonyChat
+main: me.afaithone.harmonychat.HarmonyChat
 api-version: 1.16
 authors: [ LumenowatyDev ]
 description: This plugin allow you to moderate chat.
